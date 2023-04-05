@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  ola:
+    build:
+      context: ./build/
+      args:
+        OLA_VERSION: 0.10.9
+        CHECKOUT_COMMIT: 08c7bf8b1efbcacd63b7f3337fcebf062249af30
+
+    volumes:
+      - ./etc-olad:/etc/olad
+
+    privileged: true
+    network_mode: host
+
+    command:
+      - olad
+      - -l
+      - "3"
+      - -c
+      - /etc/olad
+      - --no-register-with-dns-sd
